@@ -3,197 +3,315 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>El Libro Abierto del Pato — Ligas</title>
 <style>
-:root{--bg:#fbfbfd;--fg:#12141a;--muted:#5b6472;--line:#e4e7ee;--card:#fff;
-  --blue:#2563eb;--yellow:#c77a0a;--star:#7c3aed;--ok:#15803d;--no:#dc2626;--warn:#b45309;}
-@media(prefers-color-scheme:dark){:root{--bg:#0b0e14;--fg:#e6e9f0;--muted:#98a2b3;--line:#212836;
-  --card:#121826;--blue:#5b8bf5;--yellow:#e0a24a;--star:#a985f0;--ok:#4ade80;--no:#f87171;--warn:#f0b657;}}
-:root[data-theme=dark]{--bg:#0b0e14;--fg:#e6e9f0;--muted:#98a2b3;--line:#212836;--card:#121826;
-  --blue:#5b8bf5;--yellow:#e0a24a;--star:#a985f0;--ok:#4ade80;--no:#f87171;--warn:#f0b657;}
-:root[data-theme=light]{--bg:#fbfbfd;--fg:#12141a;--muted:#5b6472;--line:#e4e7ee;--card:#fff;
-  --blue:#2563eb;--yellow:#c77a0a;--star:#7c3aed;--ok:#15803d;--no:#dc2626;--warn:#b45309;}
+:root{
+  --bg0:#04140d; --bg1:#07231631; --panel:#0c2318; --panel2:#0f2c1e; --line:#1c4531;
+  --line2:#26593f; --ink:#e9f4ec; --muted:#8fb79f; --muted2:#6f9c82;
+  --gold:#e6bd4e; --gold-dim:#c39a34; --gold-soft:#3a3016;
+  --blue:#63a9ff; --yellow:#f2c552; --star:#c39bff;
+  --ok:#5bd98d; --no:#ff6f6f; --warn:#f0b24a;
+  --shadow:0 8px 30px rgba(0,0,0,.35);
+}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);
-  font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.5}
-main{max-width:960px;margin:0 auto;padding:24px 18px 48px}
-.hero h1{font-size:1.9rem;margin:0 0 4px;letter-spacing:-.02em}
-.tag{color:var(--muted);font-weight:400}
-.promise{font-size:1.15rem;margin:0 0 14px}
-.tr-state{border-radius:10px;padding:10px 14px;font-size:.95rem;border:1px solid var(--line);background:var(--card)}
-.tr-state.empty{border-left:4px solid var(--warn)}
-.tr-state.live{border-left:4px solid var(--blue)}
-.tr-back{font-size:.82rem;color:var(--muted);margin-top:6px}
-.ruido{margin:16px 0;border:1px solid var(--warn);background:color-mix(in srgb,var(--warn) 12%,transparent);
-  color:var(--warn);border-radius:10px;padding:12px 16px;font-weight:600;font-size:1.02rem}
-.acc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-top:18px}
-.acc.blue{border-top:3px solid var(--blue)} .acc.yellow{border-top:3px solid var(--yellow)}
-.acc.star{border-top:3px solid var(--star)} .acc.audit{border-top:3px solid var(--muted)}
-.acc h2{margin:0 0 8px;font-size:1.25rem}
-.sub{color:var(--muted);font-weight:400;font-size:.9rem}
-.lead{color:var(--muted);margin:0 0 14px;max-width:62ch}
-.calib-wrap{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
-.calib{width:320px;height:320px;max-width:100%}
-.calib .grid{stroke:var(--line);stroke-width:1}
-.calib .diag{stroke:var(--muted);stroke-dasharray:4 4;stroke-width:1.5}
-.calib .cline{fill:none;stroke:var(--blue);stroke-width:1.5;opacity:.5}
-.calib .pt{fill:var(--blue);opacity:.85}
-.calib .axt{fill:var(--muted);font-size:10px} .calib .axl{fill:var(--muted);font-size:11px}
-.calib .warnbox{fill:color-mix(in srgb,var(--warn) 18%,transparent);stroke:var(--warn);rx:6}
-.calib .warnt{fill:var(--warn);font-size:15px;font-weight:700}
-.calib .warnt2{fill:var(--warn);font-size:12px}
-.calib-legend{flex:1;min-width:220px;font-size:.85rem;color:var(--muted)}
-.tallies{display:flex;gap:14px;margin-top:16px;flex-wrap:wrap}
-.tally{background:color-mix(in srgb,var(--blue) 7%,transparent);border-radius:10px;padding:10px 14px}
-.tn{font-size:1.5rem;font-weight:800;font-variant-numeric:tabular-nums;display:block}
-.tl{font-size:.8rem;color:var(--muted)}
-.big{font-size:2.6rem;font-weight:800;font-variant-numeric:tabular-nums;line-height:1}
-.big .den{font-size:1.4rem;color:var(--muted);font-weight:600}
-.biglbl{display:block;font-size:.85rem;color:var(--muted);font-weight:400;margin-top:2px}
-.byf{margin-top:12px;font-size:.9rem}
-.chip{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:2px 10px;margin:0 4px 4px 0}
-.matices{margin-top:12px;font-size:.9rem} .matices summary{cursor:pointer;color:var(--muted)}
-.matices ul{margin:8px 0 0;padding-left:18px;columns:2}
-.apolist{list-style:none;padding:0;margin:12px 0 0}
-.apo{border:1px solid var(--line);border-left:4px solid var(--muted);border-radius:8px;
-  padding:8px 12px;margin-bottom:8px;font-size:.92rem}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;color:var(--ink);line-height:1.55;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  background:radial-gradient(1200px 600px at 20% -10%, #0c3020 0%, transparent 60%),
+             radial-gradient(900px 500px at 110% 0%, #123a26 0%, transparent 55%),
+             linear-gradient(180deg, var(--bg0), #030f0a 60%);
+  background-attachment:fixed;min-height:100vh}
+.glow{position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(600px 300px at 50% -5%, rgba(230,189,78,.06), transparent 70%)}
+main{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:26px 16px 56px}
+a{color:var(--gold)}
+h1,h2,h3{letter-spacing:-.01em}
+
+/* --- hero --- */
+.hero{margin-bottom:18px}
+.hero-top{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.hero h1{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:2.15rem;margin:0;
+  color:var(--gold);text-shadow:0 1px 0 rgba(0,0,0,.4)}
+.hero h1 .del{color:var(--ink);font-style:italic;font-weight:400}
+.hero-liga{border:1px solid var(--gold-dim);color:var(--gold);border-radius:999px;
+  padding:2px 12px;font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.tagline{font-family:Georgia,serif;font-size:1.35rem;margin:.35rem 0 .8rem;color:var(--ink)}
+.tagline b{color:var(--gold)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:4px 12px;
+  font-size:.8rem;color:var(--muted)}
+
+/* --- aviso de muestra --- */
+.aviso-muestra{display:flex;gap:12px;align-items:flex-start;margin:0 0 18px;
+  background:linear-gradient(90deg, rgba(240,178,74,.14), rgba(240,178,74,.04));
+  border:1px solid var(--warn);border-left:4px solid var(--warn);border-radius:12px;padding:13px 16px}
+.aviso-muestra.empty{border-color:var(--gold-dim);border-left-color:var(--gold);
+  background:linear-gradient(90deg, rgba(230,189,78,.12), transparent)}
+.aviso-muestra .am-ico{font-size:1.3rem;line-height:1.2}
+.aviso-muestra b{color:var(--warn)} .aviso-muestra.empty b{color:var(--gold)}
+
+/* --- tarjeta de cuentas --- */
+.cuentas-card,.tabla-card{background:linear-gradient(180deg, var(--panel), var(--panel2));
+  border:1px solid var(--line);border-radius:18px;padding:6px;box-shadow:var(--shadow);margin-bottom:20px}
+.tabla-card{padding:20px 22px}
+.tabs{display:flex;gap:4px;padding:8px 8px 0;flex-wrap:wrap}
+.tab{flex:1 1 auto;min-width:150px;cursor:pointer;font:inherit;font-weight:600;font-size:.92rem;
+  color:var(--muted);background:transparent;border:1px solid transparent;border-radius:12px 12px 0 0;
+  padding:12px 14px;transition:.15s;border-bottom:2px solid transparent}
+.tab:hover{color:var(--ink);background:rgba(255,255,255,.03)}
+.tab.activo{color:var(--gold);background:var(--panel2);border-color:var(--line);
+  border-bottom-color:var(--panel2)}
+.paneles{padding:20px 22px 8px}
+.panel-cuenta .lead{color:var(--muted);max-width:64ch;margin:.2rem 0 18px;font-size:1.02rem}
+.lead b{color:var(--ink)}
+.muted{color:var(--muted)}
+
+/* --- KPIs --- */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:22px}
+.kpi{background:var(--bg1);border:1px solid var(--line);border-radius:14px;padding:14px 16px;
+  position:relative;overflow:hidden}
+.kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold)}
+.k-val{font-size:1.9rem;font-weight:800;font-variant-numeric:tabular-nums;color:var(--ink);line-height:1.1}
+.k-lab{font-size:.82rem;color:var(--muted);margin-top:3px;font-weight:600}
+.k-sub{font-size:.72rem;color:var(--muted2);display:block;margin-top:2px}
+
+/* --- curva --- */
+.curva-wrap{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.curva-box{flex:0 0 auto}
+.curva{width:340px;height:340px;max-width:100%}
+.curva .grid{stroke:var(--line);stroke-width:1}
+.curva .diag{stroke:var(--gold-dim);stroke-dasharray:5 5;stroke-width:1.5;opacity:.8}
+.curva .diaglbl{fill:var(--gold-dim);font-size:10px;opacity:.9}
+.curva .cline{fill:none;stroke:var(--blue);stroke-width:2;opacity:.55}
+.curva .pt{fill:var(--blue);opacity:.9;stroke:#0a1c13;stroke-width:1.5;cursor:pointer}
+.curva .pt:hover{fill:var(--gold)}
+.curva .pt-tenue{opacity:.4}
+.curva .axt{fill:var(--muted2);font-size:10px} .curva .axl{fill:var(--muted);font-size:11px}
+.curva-leg{flex:1;min-width:230px;font-size:.9rem}
+.curva-leg p{margin:.2rem 0 .7rem} .curva-leg b{color:var(--ink)}
+.curva-aviso{display:flex;gap:14px;align-items:center;width:340px;max-width:100%;min-height:200px;
+  background:var(--bg1);border:1px dashed var(--line2);border-radius:14px;padding:20px}
+.curva-aviso .ca-ico{font-size:2rem}
+.curva-aviso b{display:block;color:var(--gold);margin-bottom:4px}
+.curva-aviso span{color:var(--muted);font-size:.9rem}
+
+/* --- pato: barras por fuerza --- */
+.fuerza-wrap h3,.aporta-wrap h3{font-size:1.05rem;margin:.4rem 0 .3rem;color:var(--ink)}
+.fuerza-wrap .muted{font-size:.88rem;margin:0 0 12px}
+.bf{display:flex;flex-direction:column;gap:10px;max-width:520px}
+.bf-row{display:flex;align-items:center;gap:12px}
+.bf-k{flex:0 0 84px;font-size:.9rem;text-transform:capitalize;color:var(--muted)}
+.bf-bar{flex:1;height:12px;background:var(--bg1);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.bf-fill{display:block;height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--yellow));border-radius:999px}
+.bf-n{flex:0 0 auto;font-variant-numeric:tabular-nums;font-weight:700;font-size:.9rem}
+
+/* --- aporta: lista --- */
+.apolist{list-style:none;padding:0;margin:8px 0 0;display:flex;flex-direction:column;gap:8px}
+.apo{background:var(--bg1);border:1px solid var(--line);border-left:4px solid var(--muted2);
+  border-radius:10px;padding:10px 14px;font-size:.93rem}
 .apo.ok{border-left-color:var(--ok)} .apo.no{border-left-color:var(--no)}
-.apk{font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);
-  border:1px solid var(--line);border-radius:4px;padding:1px 6px;margin-right:4px}
+.apo.muted{border-left-color:var(--line2);color:var(--muted)}
+.apo b{color:var(--ink)} .apo .apo-d{display:block;color:var(--muted);font-size:.88rem;margin-top:2px}
+.apo i{color:var(--ink);font-style:normal;font-weight:600}
+.apk{font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;color:var(--gold);
+  border:1px solid var(--gold-dim);border-radius:5px;padding:1px 7px;margin-right:6px}
 b.ok{color:var(--ok)} b.no{color:var(--no)}
-.fine{font-size:.82rem;color:var(--muted);margin:10px 0 0}
-.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;font-size:.82rem;align-items:end}
-.filters label{display:flex;flex-direction:column;gap:2px;color:var(--muted)}
-.filters select,.filters button{font:inherit;padding:4px 8px;border:1px solid var(--line);
-  border-radius:6px;background:var(--card);color:var(--fg)}
-.filters button{cursor:pointer;align-self:end}
-.tbl-scroll{overflow-x:auto}
-table{border-collapse:collapse;width:100%;font-size:.86rem}
-th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:top}
-th{font-size:.76rem;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);white-space:nowrap}
-.nowrap{white-space:nowrap} .match{font-weight:600} .vs{color:var(--muted);font-weight:400}
-.prob{color:var(--fg);line-height:1.5} .res{font-weight:700;font-variant-numeric:tabular-nums}
-.prob .ece{font-size:.7rem;color:var(--muted)} .prob .std{color:var(--muted);font-style:italic}
-.pend{color:var(--muted);font-weight:400;font-style:italic}
-.hit{text-align:center;font-weight:700} .hit.no{color:var(--no)} .hit.ok{color:var(--ok)}
-.mini{font-size:.68rem;border-radius:4px;padding:1px 6px;white-space:nowrap}
-.badge{background:var(--yellow);color:#fff}
-.vm-contradice{background:color-mix(in srgb,var(--no) 16%,transparent);color:var(--no)}
-.vm-rellena{background:color-mix(in srgb,var(--yellow) 18%,transparent);color:var(--yellow)}
-.vm-confirma{background:color-mix(in srgb,var(--blue) 14%,transparent);color:var(--blue)}
-.vm-matiz,.vm-sin{background:var(--line);color:var(--muted)}
-.fus{max-width:180px} .fu{color:var(--blue);text-decoration:none;border-bottom:1px dotted;margin-right:6px}
-.empty-note{color:var(--muted);font-style:italic;padding:14px;border:1px dashed var(--line);border-radius:10px}
-footer{margin-top:26px;color:var(--muted);font-size:.82rem}
-footer .disc{margin-top:10px;font-weight:600}
+
+/* --- backtest --- */
+.backtest{margin:6px 12px 12px;padding:11px 16px;background:rgba(0,0,0,.18);border:1px solid var(--line);
+  border-radius:12px;font-size:.83rem;color:var(--muted)}
+.backtest b{color:var(--muted)} .backtest i{color:var(--muted2)}
+
+/* --- tabla --- */
+.tabla-card h2{margin:0 0 4px;font-size:1.3rem}
+.tabla-card .sub{color:var(--muted);font-weight:400;font-size:.9rem}
+.tabla-card .lead{color:var(--muted);margin:.2rem 0 16px;max-width:64ch}
+.filtros{display:flex;gap:10px;flex-wrap:wrap;align-items:end;margin-bottom:14px}
+.filtros label{display:flex;flex-direction:column;gap:3px;font-size:.76rem;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.03em}
+.filtros select,.filtros input,.filtros button{font:inherit;font-size:.9rem;padding:7px 10px;
+  border:1px solid var(--line2);border-radius:9px;background:var(--panel);color:var(--ink)}
+.filtros .f-buscar{flex:1 1 180px} .filtros input{width:100%}
+.filtros button{cursor:pointer;color:var(--gold);border-color:var(--gold-dim);font-weight:600;text-transform:none}
+.filtros button:hover{background:var(--gold-soft)}
+.tabla-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:.88rem;min-width:640px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{position:sticky;top:0;background:var(--panel2);font-size:.72rem;text-transform:uppercase;
+  letter-spacing:.04em;color:var(--muted);white-space:nowrap;z-index:1}
+tbody tr:hover{background:rgba(255,255,255,.025)}
+tbody tr:last-child td{border-bottom:none}
+.nowrap{white-space:nowrap} .dt{color:var(--muted);font-variant-numeric:tabular-nums}
+.match{font-weight:600} .vs{color:var(--muted);font-weight:400;font-size:.85em}
+.liga-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--gold);
+  margin-right:7px;vertical-align:middle;opacity:.7}
+.tbadge{display:inline-block;font-size:.66rem;background:var(--gold-soft);color:var(--gold);
+  border:1px solid var(--gold-dim);border-radius:5px;padding:0 6px;margin-left:4px;white-space:nowrap}
+.dijo{line-height:1.7} .d-1x2{color:var(--ink)} .d-p{color:var(--muted);font-variant-numeric:tabular-nums}
+.d-mkt{display:block;font-size:.8rem;color:var(--muted2)}
+.d-pato{display:block;font-size:.82rem;color:var(--yellow);margin-top:2px}
+.vm{font-size:.68rem;border-radius:4px;padding:0 6px;margin-left:2px}
+.vm-contradice{background:rgba(255,111,111,.16);color:var(--no)}
+.vm-rellena{background:rgba(242,197,82,.16);color:var(--yellow)}
+.vm-confirma{background:rgba(99,169,255,.14);color:var(--blue)}
+.res{font-weight:700;font-variant-numeric:tabular-nums}
+.hit{text-align:center;font-weight:800;font-size:1.05rem}
+.hit.ok{color:var(--ok)} .hit.no{color:var(--no)} .hit.pend{color:var(--muted2)}
+.pend{color:var(--muted);font-style:italic;font-weight:400}
+.fus{max-width:150px} .fu{color:var(--blue);text-decoration:none;border-bottom:1px dotted;margin-right:6px;font-size:.85rem}
+.sin-res{color:var(--muted);font-style:italic;padding:16px;text-align:center}
+.matices{margin-top:14px;font-size:.9rem} .matices summary{cursor:pointer;color:var(--muted)}
+.matices ul{margin:8px 0 0;padding-left:18px;columns:2;color:var(--muted)}
+
+/* --- footer --- */
+footer{margin-top:28px;color:var(--muted);font-size:.84rem;text-align:center}
+.f-lema{max-width:60ch;margin:0 auto 12px} .f-lema b{color:var(--ink)}
+.gen{color:var(--muted2);font-size:.78rem} .disc{margin-top:10px;font-weight:600;color:var(--muted)}
+
+@media(max-width:640px){
+  main{padding:20px 12px 44px}
+  .hero h1{font-size:1.7rem} .tagline{font-size:1.15rem}
+  .paneles{padding:16px 14px 4px} .tabla-card{padding:16px 14px}
+  .tab{min-width:calc(50% - 4px);font-size:.85rem;padding:10px 8px}
+  .curva-wrap{gap:14px} .kpis{gap:9px} .k-val{font-size:1.6rem}
+  .matices ul{columns:1}
+}
 </style></head>
 <body>
+<div class="glow"></div>
 <main>
   <header class="hero">
-    <h1>📖 El Libro Abierto del Pato <span class="tag">— Ligas</span></h1>
-    <p class="promise">"Cuando el Pato dice 60%, pasa ~60%. <b>No me creas: revisa.</b>"</p>
-    <div class="tr-state live"><b>muestra pequeña (n=2)</b> — el desempeño EN VIVO aún se está acumulando</div><div class="tr-back">Referencia: <b>backtest histórico</b> ECE 0.68% (Brasileirão 2012-2025 (walk-forward, anti-look-ahead), n=5294). <i>Backtest ≠ vivo — nunca se presenta uno como el otro.</i></div>
+    <div class="hero-top">
+      <h1>🦆 El Libro Abierto <span class="del">del Pato</span></h1>
+      <span class="hero-liga">Ligas</span>
+    </div>
+    <p class="tagline">No me creas. <b>Revisa.</b></p>
+    <div class="chips"><span class="chip">📅 actualizado 18 jul</span><span class="chip">🗓️ 16 jul–23 jul</span><span class="chip">🏆 Brasileirão Série A</span></div>
   </header>
-  <div class="ruido">⚠️ Muestra pequeña (n=2). Nada de esto significa nada todavía — se cuenta desde el día 1, pero una racha corta no es talento ni es suerte medible. Con paciencia se verá.</div>
-  
-  <section class="acc blue">
-    <h2>🔵 La cuenta del modelo</h2>
-    <p class="lead">El titular no es "% de acierto" — es la <b>calibración</b>: ¿cuando el modelo dice
-      60%, pasa ~60%?</p>
-    <div class="calib-wrap"><svg viewBox="0 0 320 320" class="calib" role="img" aria-label="Curva de calibración: probabilidad predicha vs frecuencia real"><line x1="40" y1="280" x2="40" y2="12" class="grid"/><line x1="40" y1="280" x2="308" y2="280" class="grid"/><text x="40" y="296" class="axt" text-anchor="middle">0</text><text x="32" y="284" class="axt" text-anchor="end">0</text><line x1="107" y1="280" x2="107" y2="12" class="grid"/><line x1="40" y1="213" x2="308" y2="213" class="grid"/><text x="107" y="296" class="axt" text-anchor="middle">25</text><text x="32" y="217" class="axt" text-anchor="end">25</text><line x1="174" y1="280" x2="174" y2="12" class="grid"/><line x1="40" y1="146" x2="308" y2="146" class="grid"/><text x="174" y="296" class="axt" text-anchor="middle">50</text><text x="32" y="150" class="axt" text-anchor="end">50</text><line x1="241" y1="280" x2="241" y2="12" class="grid"/><line x1="40" y1="79" x2="308" y2="79" class="grid"/><text x="241" y="296" class="axt" text-anchor="middle">75</text><text x="32" y="83" class="axt" text-anchor="end">75</text><line x1="308" y1="280" x2="308" y2="12" class="grid"/><line x1="40" y1="12" x2="308" y2="12" class="grid"/><text x="308" y="296" class="axt" text-anchor="middle">100</text><text x="32" y="16" class="axt" text-anchor="end">100</text><line x1="40" y1="280" x2="308" y2="12" class="diag"/><polyline points="107.6,280.0 165.9,12.0 179.5,12.0" class="cline"/><circle cx="107.6" cy="280.0" r="5.0" class="pt"><title>predicho 25% · real 0% · n=4</title></circle><circle cx="165.9" cy="12.0" r="4.0" class="pt"><title>predicho 47% · real 100% · n=1</title></circle><circle cx="179.5" cy="12.0" r="4.0" class="pt"><title>predicho 52% · real 100% · n=1</title></circle><rect x="40" y="124" width="268" height="44" class="warnbox"/><text x="174" y="144" class="warnt" text-anchor="middle">muestra insuficiente</text><text x="174" y="162" class="warnt2" text-anchor="middle">esto aún no significa nada</text><text x="174" y="316" class="axl" text-anchor="middle">probabilidad que dijo el Pato (%)</text><text x="14" y="146" class="axl" text-anchor="middle" transform="rotate(-90 14 146)">con qué frecuencia pasó (%)</text></svg>
-      <div class="calib-legend">La diagonal es la calibración perfecta. Cada punto es un tramo de
-        probabilidad; su tamaño, cuántos casos hay. Cuanto más pegados a la diagonal, más honesto el número.</div>
+
+  <div class="aviso-muestra"><span class="am-ico">⚠️</span><div><b>Muestra aún pequeña: n=5.</b> Hacen falta ~100 partidos para que estas cuentas signifiquen algo. Una racha corta no es talento ni suerte medible — se cuenta desde el día 1, con paciencia. <b>Nada de esto es un veredicto todavía.</b></div></div>
+
+  <section class="cuentas-card">
+    <div class="tabs" role="tablist"><button class="tab activo" data-cuenta="modelo" role="tab">🔵 Calibración del modelo</button><button class="tab" data-cuenta="pato" role="tab">🟡 Juicio del Pato</button><button class="tab" data-cuenta="aporta" role="tab">⭐ ¿Aporta el Pato?</button></div>
+    <div class="paneles"><div class="panel-cuenta" data-cuenta="modelo">
+  <p class="lead">El titular no es "% de acierto" — es la <b>calibración</b>: cuando el modelo dice
+    <b>60%</b>, ¿pasa cerca del <b>60%</b>? Esa es la promesa, y aquí se ve.</p>
+  <div class="kpis"><div class="kpi"><div class="k-val">5</div><div class="k-lab">pronósticos</div><span class="k-sub">1X2 sellados</span></div><div class="kpi"><div class="k-val">4/5</div><div class="k-lab">favorito acertado</div><span class="k-sub">el más probable ganó</span></div><div class="kpi"><div class="k-val">—</div><div class="k-lab">error de calibración</div><span class="k-sub">ECE — cuánto se desvía</span></div><div class="kpi"><div class="k-val">—</div><div class="k-lab">Brier score</div><span class="k-sub">0 = perfecto, menor mejor</span></div></div>
+  <div class="curva-wrap">
+    <div class="curva-box"><div class="curva-aviso"><div class="ca-ico">📈</div><div><b>La curva aparecerá con ~30 partidos.</b><span>Con n=5 dibujarla sería fingir una tendencia que aún no existe. Faltan ~25. Mientras tanto, cada acierto y cada fallo ya se cuenta abajo.</span></div></div></div>
+    <div class="curva-leg">
+      <p><b>Cómo se lee.</b> Cada punto es un tramo de probabilidad. Su altura es con qué frecuencia
+         pasó de verdad; su tamaño, cuántos casos hay. Cuanto más pegado a la diagonal, más honesto
+         el número.</p>
+      <p class="muted">La diagonal punteada es la calibración perfecta: decir 70% y que pase el 70%.</p>
     </div>
-    <div class="tallies">
-      <div class="tally"><span class="tn">2/2</span>
-        <span class="tl">favorito 1X2 acertado</span></div>
-      <div class="tally"><span class="tn">0/0</span>
-        <span class="tl">otros mercados publicados</span></div>
-    </div>
+  </div>
+</div><div class="panel-cuenta" data-cuenta="pato" hidden>
+  <p class="lead">El <b>juicio</b> del Pato: cuando lee algo que el modelo no ve (una baja, un
+    contexto), se moja con una dirección. Su cuenta va <b>aparte</b> de la del modelo, siempre.</p>
+  <div class="kpis"><div class="kpi"><div class="k-val">4</div><div class="k-lab">leans con dirección</div><span class="k-sub">el Pato se mojó</span></div><div class="kpi"><div class="k-val">3/4</div><div class="k-lab">aciertos del juicio</div><span class="k-sub">acertó la dirección</span></div><div class="kpi"><div class="k-val">75%</div><div class="k-lab">tasa de acierto</div><span class="k-sub">sobre los que dio</span></div><div class="kpi"><div class="k-val">0/0</div><div class="k-lab">leans fuertes</div><span class="k-sub">cuando más convencido</span></div></div>
+  <div class="fuerza-wrap">
+    <h3>Aciertos por convicción</h3>
+    <p class="muted">Un lean "fuerte" es cuando el Pato está más seguro. Si el juicio vale, debería
+      acertar más donde más se moja.</p>
+    <div class="bf"><div class="bf-row"><span class="bf-k">leve</span><span class="bf-bar"><span class="bf-fill" style="width:67%"></span></span><span class="bf-n">2/3</span></div><div class="bf-row"><span class="bf-k">moderada</span><span class="bf-bar"><span class="bf-fill" style="width:100%"></span></span><span class="bf-n">1/1</span></div></div>
+  </div>
+</div><div class="panel-cuenta" data-cuenta="aporta" hidden>
+  <p class="lead">La cuenta que <b>nadie más lleva</b>: solo suma cuando el Pato fue <b>contra</b> el
+    modelo o <b>rellenó</b> un hueco suyo. Es la que dice si el juicio aporta algo sobre la matemática
+    — y se cuenta gane o pierda.</p>
+  <div class="kpis"><div class="kpi"><div class="k-val">0</div><div class="k-lab">casos que cuentan</div><span class="k-sub">se apartó del modelo</span></div><div class="kpi"><div class="k-val">0/0</div><div class="k-lab">acertó al apartarse</div><span class="k-sub">el juicio sobre el número</span></div><div class="kpi"><div class="k-val">0</div><div class="k-lab">veces que contradijo</div><span class="k-sub">fue contra su modelo</span></div><div class="kpi"><div class="k-val">0</div><div class="k-lab">veces que rellenó</div><span class="k-sub">donde el modelo sabía poco</span></div></div>
+  <div class="aporta-wrap">
+    <h3>Uno por uno — cuando el Pato se apartó</h3>
+    <ul class="apolist"><li class="apo muted">Aún no hubo leans contra el modelo ni de relleno.</li></ul>
+  </div>
+</div></div>
+    <div class="backtest"><b>Backtest histórico</b> (referencia, NO desempeño en vivo): ECE 0.68% sobre Brasileirão 2012-2025 (walk-forward, anti-look-ahead), n=5294. <i>El backtest nunca se presenta como si fuera el resultado en vivo.</i></div>
   </section>
-  
-  <section class="acc yellow">
-    <h2>🟡 La cuenta del Pato <span class="sub">(juicio de contexto)</span></h2>
-    <div class="big">2<span class="den">/2</span>
-      <span class="biglbl">leans direccionales acertados</span></div>
-    <div class="byf">Por fuerza: <span class="chip">leve: <b>2/2</b></span></div>
-    <details class="matices"><summary>Partidos sin dirección — <b>matiz</b>, no puntuables
-      (3) · el Pato no dio llamada</summary>
-      <ul><li>Mirassol vs Grêmio</li> <li>Atlético-MG vs Bahia</li> <li>Coritiba vs Palmeiras</li></ul></details>
-  </section>
-  
-  <section class="acc star">
-    <h2>⭐ ¿Aporta el Pato sobre el modelo?</h2>
-    <p class="lead">La cuenta que nadie más lleva: solo cuenta cuando el Pato fue <b>contra</b> el modelo
-      o <b>rellenó</b> un hueco suyo. Es la que dice si el juicio vale algo sobre la matemática.</p>
-    <div class="big">0<span class="den">/0</span>
-      <span class="biglbl">aciertos cuando se apartó del modelo</span></div>
-    <ul class="apolist"><li class='apo'>Aún no hubo leans contra el modelo ni de relleno.</li></ul>
-    <p class="fine">Con muestra pequeña no significa nada — pero se cuenta desde el día 1, gane o pierda.</p>
-  </section>
-  
-  <section class="acc audit">
-    <h2>🔍 Tabla auditable <span class="sub">— revísalo tú</span></h2>
-    <div class="filters">
-      <label>Con/sin 🟡 <select id="f-pato"><option value="">todos</option>
-        <option value="si">con 🟡</option><option value="no">sin 🟡</option></select></label>
-      <label>vs modelo <select id="f-vm"><option value="">todos</option>
-        <option value="confirma">confirma</option><option value="contradice">contradice</option>
-        <option value="rellena">rellena</option><option value="none">matiz</option></select></label>
-      <label>Modelo 1X2 <select id="f-mhit"><option value="">todos</option>
-        <option value="ok">acertó</option><option value="no">falló</option></select></label>
-      <label>Pato <select id="f-phit"><option value="">todos</option>
-        <option value="ok">acertó</option><option value="no">falló</option></select></label>
-      <label>Datos <select id="f-badge"><option value="">todos</option>
-        <option value="si">limitados</option><option value="no">sólidos</option></select></label>
-      <button id="f-reset" type="button">limpiar</button>
-    </div>
-    <div class="tbl-scroll"><table id="audit">
-      <thead><tr><th>Fecha</th><th>Partido</th><th>Modelo (1X2 · destacados)</th><th>Lean del Pato</th>
-        <th>vs modelo</th><th>Resultado</th><th>🔵</th><th>🟡</th><th>Fuentes</th></tr></thead>
-      <tbody><tr data-j="19" data-pato="si" data-vm="confirma" data-mhit="" data-phit="" data-badge="no"><td class="nowrap">17 jul</td><td class="match">Fluminense <span class="vs">vs</span> RB Bragantino </td><td class="prob"><b>1X2</b> Fluminense 52%<br><span class="std">estándar (solo 1X2)</span></td><td>Fluminense · leve</td><td><span class="mini vm-confirma">confirma</span></td><td class="nowrap res"><span class="pend">pendiente</span></td><td class="hit pend">—</td><td class="hit pend">—</td><td class="fus"><a href="https://centralfluminense.com.br/" target="_blank" rel="noopener" class="fu">centralfluminense.com.br</a> <a href="https://www.lance.com.br/fluminense" target="_blank" rel="noopener" class="fu">lance.com.br</a> <a href="https://www.sportytrader.es/" target="_blank" rel="noopener" class="fu">sportytrader.es</a></td></tr>
-<tr data-j="19" data-pato="si" data-vm="matiz" data-mhit="" data-phit="" data-badge="si"><td class="nowrap">17 jul</td><td class="match">Mirassol <span class="vs">vs</span> Grêmio <span class="mini badge">⚠️ datos lim.</span></td><td class="prob"><b>1X2</b> Mirassol 47%<br><span class="std">estándar (solo 1X2)</span></td><td>matiz</td><td><span class="mini vm-matiz">no puntúa</span></td><td class="nowrap res"><span class="pend">pendiente</span></td><td class="hit pend">—</td><td class="hit pend">—</td><td class="fus"><a href="https://www.lance.com.br/mirassol" target="_blank" rel="noopener" class="fu">lance.com.br</a> <a href="https://www.flashscore.com/" target="_blank" rel="noopener" class="fu">flashscore.com</a></td></tr>
-<tr data-j="19" data-pato="si" data-vm="matiz" data-mhit="" data-phit="" data-badge="no"><td class="nowrap">21 jul</td><td class="match">Atlético-MG <span class="vs">vs</span> Bahia </td><td class="prob"><b>1X2</b> Atlético-MG 54%<br>Goles local +1.5 <span class="ece">ECE 1.0%</span> · Local gana y +2.5 <span class="ece">ECE 1.1%</span> · Hándicap −1 <span class="ece">ECE 1.8%</span></td><td>matiz</td><td><span class="mini vm-matiz">no puntúa</span></td><td class="nowrap res"><span class="pend">pendiente</span></td><td class="hit pend">—</td><td class="hit pend">—</td><td class="fus"><a href="https://www.cbf.com.br/futebol-brasileiro/noticias/campeonato-brasileiro-serie-a/a/cbf-divulga-tabela-detalhada-das-rodadas-19-a-24-do-brasileirao-serie-a" target="_blank" rel="noopener" class="fu">cbf.com.br</a> <a href="https://www.band.com.br/band-vale/noticias/quando-e-a-retomada-do-brasileirao-serie-a-apos-a-copa-do-mundo-202607061416" target="_blank" rel="noopener" class="fu">band.com.br</a></td></tr>
-<tr data-j="19" data-pato="si" data-vm="matiz" data-mhit="" data-phit="" data-badge="no"><td class="nowrap">22 jul</td><td class="match">Coritiba <span class="vs">vs</span> Palmeiras </td><td class="prob"><b>1X2</b> Palmeiras 50%<br>Hándicap +1 <span class="ece">ECE 1.1%</span> · Goles local +1.5 <span class="ece">ECE 1.0%</span> · Local gana y +2.5 <span class="ece">ECE 1.1%</span> · Sin empate🟡 <span class="ece">ECE 2.0%</span></td><td>matiz</td><td><span class="mini vm-matiz">no puntúa</span></td><td class="nowrap res"><span class="pend">pendiente</span></td><td class="hit pend">—</td><td class="hit pend">—</td><td class="fus"><a href="https://www.cbf.com.br/futebol-brasileiro/noticias/campeonato-brasileiro-serie-a/a/cbf-divulga-tabela-detalhada-das-rodadas-19-a-24-do-brasileirao-serie-a" target="_blank" rel="noopener" class="fu">cbf.com.br</a> <a href="https://www.band.com.br/band-vale/noticias/quando-e-a-retomada-do-brasileirao-serie-a-apos-a-copa-do-mundo-202607061416" target="_blank" rel="noopener" class="fu">band.com.br</a></td></tr>
-<tr data-j="19" data-pato="no" data-vm="" data-mhit="" data-phit="" data-badge="no"><td class="nowrap">22 jul</td><td class="match">Internacional <span class="vs">vs</span> Cruzeiro </td><td class="prob"><b>1X2</b> Internacional 47%<br><span class="std">estándar (solo 1X2)</span></td><td>—</td><td><span class="mini vm-sin">sin 🟡</span></td><td class="nowrap res"><span class="pend">pendiente</span></td><td class="hit pend">—</td><td class="hit pend">—</td><td class="fus">—</td></tr>
-<tr data-j="19" data-pato="si" data-vm="contradice" data-mhit="" data-phit="" data-badge="no"><td class="nowrap">22 jul</td><td class="match">São Paulo <span class="vs">vs</span> Athletico-PR </td><td class="prob"><b>1X2</b> São Paulo 48%<br><span class="std">estándar (solo 1X2)</span></td><td>Athletico-PR · moderada</td><td><span class="mini vm-contradice">contradice</span></td><td class="nowrap res"><span class="pend">pendiente</span></td><td class="hit pend">—</td><td class="hit pend">—</td><td class="fus"><a href="https://www.cbf.com.br/futebol-brasileiro/noticias/campeonato-brasileiro-serie-a/a/cbf-divulga-tabela-detalhada-das-rodadas-19-a-24-do-brasileirao-serie-a" target="_blank" rel="noopener" class="fu">cbf.com.br</a> <a href="https://www.band.com.br/band-vale/noticias/quando-e-a-retomada-do-brasileirao-serie-a-apos-a-copa-do-mundo-202607061416" target="_blank" rel="noopener" class="fu">band.com.br</a></td></tr>
-<tr data-j="19" data-pato="si" data-vm="confirma" data-mhit="" data-phit="" data-badge="no"><td class="nowrap">22 jul</td><td class="match">Chapecoense <span class="vs">vs</span> Flamengo </td><td class="prob"><b>1X2</b> Flamengo 53%<br>Hándicap +1 <span class="ece">ECE 1.1%</span> · Local gana y +2.5 <span class="ece">ECE 1.1%</span> · Goles local +1.5 <span class="ece">ECE 1.0%</span> · Sin empate🟡 <span class="ece">ECE 2.0%</span></td><td>Flamengo · moderada</td><td><span class="mini vm-confirma">confirma</span></td><td class="nowrap res"><span class="pend">pendiente</span></td><td class="hit pend">—</td><td class="hit pend">—</td><td class="fus"><a href="https://www.band.com.br/esportes/futebol/copa-do-mundo/noticias/brasileirao-copa-do-mundo-pausa-202606010842" target="_blank" rel="noopener" class="fu">band.com.br</a> <a href="https://www.gazetaesportiva.com/" target="_blank" rel="noopener" class="fu">gazetaesportiva.com</a></td></tr>
-<tr data-j="19" data-pato="si" data-vm="rellena" data-mhit="" data-phit="" data-badge="si"><td class="nowrap">23 jul</td><td class="match">Corinthians <span class="vs">vs</span> Remo <span class="mini badge">⚠️ datos lim.</span></td><td class="prob"><b>1X2</b> Corinthians 59%<br>Hándicap +1 <span class="ece">ECE 1.1%</span> · Goles local +1.5 <span class="ece">ECE 1.0%</span> · Local gana y +2.5 <span class="ece">ECE 1.1%</span> · Sin empate🟡 <span class="ece">ECE 2.0%</span></td><td>Corinthians · moderada</td><td><span class="mini vm-rellena">rellena</span></td><td class="nowrap res"><span class="pend">pendiente</span></td><td class="hit pend">—</td><td class="hit pend">—</td><td class="fus"><a href="https://www.cbf.com.br/futebol-brasileiro/noticias/campeonato-brasileiro-serie-a/a/cbf-divulga-tabela-detalhada-das-rodadas-19-a-24-do-brasileirao-serie-a" target="_blank" rel="noopener" class="fu">cbf.com.br</a> <a href="https://www.band.com.br/band-vale/noticias/quando-e-a-retomada-do-brasileirao-serie-a-apos-a-copa-do-mundo-202607061416" target="_blank" rel="noopener" class="fu">band.com.br</a></td></tr></tbody>
+
+  <section class="tabla-card">
+    <h2>🔍 Partido por partido <span class="sub">— aquí "revisa" se vuelve tangible</span></h2>
+    <p class="lead">Cada fila es un pronóstico contra su resultado real. Los fallos están, no se
+      esconden. Filtra, busca, y comprueba tú mismo.</p>
+    <div class="filtros">
+    
+    <label>Mercado<select id="f-mercado"><option value="">todas</option><option value="1x2">1x2</option><option value="goles">goles</option><option value="hándicap">hándicap</option></select></label>
+    <label>Resultado<select id="f-res"><option value="">todos</option>
+      <option value="H">gana local</option><option value="D">empate</option>
+      <option value="A">gana visitante</option></select></label>
+    <label>¿Acertó el modelo?<select id="f-mhit"><option value="">todos</option>
+      <option value="ok">acertó</option><option value="no">falló</option></select></label>
+    <label class="f-buscar">Buscar equipo<input id="f-buscar" type="search" placeholder="p. ej. Flamengo" autocomplete="off"></label>
+    <button id="f-reset" type="button">limpiar</button>
+  </div>
+    <div class="tabla-scroll"><table id="tabla">
+      <thead><tr>
+        <th>Fecha</th><th>Partido</th><th>Lo que dijo el Pato</th><th>Resultado</th>
+        <th title="¿acertó el modelo?">🔵</th><th title="¿acertó el juicio del Pato?">🟡</th>
+        <th>Fuentes</th>
+      </tr></thead>
+      <tbody><tr data-liga="Brasileirão Série A" data-mercado="1x2" data-res="H" data-mhit="ok" data-phit="ok" data-eq="botafogo santos 1x2 brasileirão série a"><td class="nowrap dt">16 jul</td><td class="match"><span class="liga-dot" title="Brasileirão Série A"></span>Botafogo <span class="vs">vs</span> Santos</td><td class="dijo"><b class="d-1x2">Botafogo</b> <span class="d-p">52%</span><span class="d-pato">🟡 Botafogo · leve <span class="vm vm-confirma">confirma</span></span></td><td class="nowrap res">2-1</td><td class="hit ok">✓</td><td class="hit ok">✓</td><td class="fus"><a href="https://fogonarede.com.br/noticias-do-botafogo/santos-tem-retorno-e-desfalque-de-peso-contra-o-botafogo-pelo-brasileirao/" target="_blank" rel="noopener" class="fu">fogonarede.com.br</a> <a href="https://www.fogaonet.com/noticias-do-botafogo/cbf-divulga-tabela-brasileirao-pos-copa-mundo-botafogo-santos-16-julho/" target="_blank" rel="noopener" class="fu">fogaonet.com</a></td></tr>
+<tr data-liga="Brasileirão Série A" data-mercado="1x2" data-res="H" data-mhit="ok" data-phit="ok" data-eq="vitória vasco da gama 1x2 brasileirão série a"><td class="nowrap dt">16 jul</td><td class="match"><span class="liga-dot" title="Brasileirão Série A"></span>Vitória <span class="vs">vs</span> Vasco da Gama</td><td class="dijo"><b class="d-1x2">Vitória</b> <span class="d-p">47%</span><span class="d-pato">🟡 Vitória · leve <span class="vm vm-confirma">confirma</span></span></td><td class="nowrap res">1-0</td><td class="hit ok">✓</td><td class="hit ok">✓</td><td class="fus"><a href="https://www.lance.com.br/vasco/vasco-nao-vai-ter-reforcos-disponiveis-no-retorno-do-brasileirao.html" target="_blank" rel="noopener" class="fu">lance.com.br</a> <a href="https://www.bahianoticias.com.br/esportes/vitoria" target="_blank" rel="noopener" class="fu">bahianoticias.com.br</a></td></tr>
+<tr data-liga="Brasileirão Série A" data-mercado="hándicap" data-res="H" data-mhit="ok" data-phit="ok" data-eq="bahia chapecoense hándicap brasileirão série a"><td class="nowrap dt">17 jul</td><td class="match"><span class="liga-dot" title="Brasileirão Série A"></span>Bahia <span class="vs">vs</span> Chapecoense</td><td class="dijo"><b class="d-1x2">Bahia</b> <span class="d-p">58%</span><span class="d-mkt">Hándicap +1 · Goles local +1.5 · Local gana y +2.5 · Sin empate</span><span class="d-pato">🟡 Bahia · moderada <span class="vm vm-confirma">confirma</span></span></td><td class="nowrap res">2-0</td><td class="hit ok">✓</td><td class="hit ok">✓</td><td class="fus"><a href="https://www.bahianoticias.com.br/esportes/bahia" target="_blank" rel="noopener" class="fu">bahianoticias.com.br</a> <a href="https://atarde.com.br/esportes/bahia" target="_blank" rel="noopener" class="fu">atarde.com.br</a> <a href="https://www.gazetaesportiva.com/" target="_blank" rel="noopener" class="fu">gazetaesportiva.com</a></td></tr>
+<tr data-liga="Brasileirão Série A" data-mercado="1x2" data-res="D" data-mhit="no" data-phit="no" data-eq="fluminense rb bragantino 1x2 brasileirão série a"><td class="nowrap dt">17 jul</td><td class="match"><span class="liga-dot" title="Brasileirão Série A"></span>Fluminense <span class="vs">vs</span> RB Bragantino</td><td class="dijo"><b class="d-1x2">Fluminense</b> <span class="d-p">52%</span><span class="d-pato">🟡 Fluminense · leve <span class="vm vm-confirma">confirma</span></span></td><td class="nowrap res">1-1</td><td class="hit no">✕</td><td class="hit no">✕</td><td class="fus"><a href="https://centralfluminense.com.br/" target="_blank" rel="noopener" class="fu">centralfluminense.com.br</a> <a href="https://www.lance.com.br/fluminense" target="_blank" rel="noopener" class="fu">lance.com.br</a> <a href="https://www.sportytrader.es/" target="_blank" rel="noopener" class="fu">sportytrader.es</a></td></tr>
+<tr data-liga="Brasileirão Série A" data-mercado="1x2" data-res="H" data-mhit="ok" data-phit="" data-eq="mirassol grêmio 1x2 brasileirão série a"><td class="nowrap dt">17 jul</td><td class="match"><span class="liga-dot" title="Brasileirão Série A"></span>Mirassol <span class="vs">vs</span> Grêmio <span class="tbadge">datos limitados</span></td><td class="dijo"><b class="d-1x2">Mirassol</b> <span class="d-p">47%</span></td><td class="nowrap res">2-1</td><td class="hit ok">✓</td><td class="hit pend">·</td><td class="fus"><a href="https://www.lance.com.br/mirassol" target="_blank" rel="noopener" class="fu">lance.com.br</a> <a href="https://www.flashscore.com/" target="_blank" rel="noopener" class="fu">flashscore.com</a></td></tr>
+<tr data-liga="Brasileirão Série A" data-mercado="goles" data-res="" data-mhit="" data-phit="" data-eq="atlético-mg bahia goles brasileirão série a"><td class="nowrap dt">21 jul</td><td class="match"><span class="liga-dot" title="Brasileirão Série A"></span>Atlético-MG <span class="vs">vs</span> Bahia</td><td class="dijo"><b class="d-1x2">Atlético-MG</b> <span class="d-p">54%</span><span class="d-mkt">Goles local +1.5 · Local gana y +2.5 · Hándicap −1</span></td><td class="nowrap res"><span class="pend">por jugar</span></td><td class="hit pend">·</td><td class="hit pend">·</td><td class="fus"><a href="https://www.cbf.com.br/futebol-brasileiro/noticias/campeonato-brasileiro-serie-a/a/cbf-divulga-tabela-detalhada-das-rodadas-19-a-24-do-brasileirao-serie-a" target="_blank" rel="noopener" class="fu">cbf.com.br</a> <a href="https://www.band.com.br/band-vale/noticias/quando-e-a-retomada-do-brasileirao-serie-a-apos-a-copa-do-mundo-202607061416" target="_blank" rel="noopener" class="fu">band.com.br</a></td></tr>
+<tr data-liga="Brasileirão Série A" data-mercado="hándicap" data-res="" data-mhit="" data-phit="" data-eq="coritiba palmeiras hándicap brasileirão série a"><td class="nowrap dt">22 jul</td><td class="match"><span class="liga-dot" title="Brasileirão Série A"></span>Coritiba <span class="vs">vs</span> Palmeiras</td><td class="dijo"><b class="d-1x2">Palmeiras</b> <span class="d-p">50%</span><span class="d-mkt">Hándicap +1 · Goles local +1.5 · Local gana y +2.5 · Sin empate</span></td><td class="nowrap res"><span class="pend">por jugar</span></td><td class="hit pend">·</td><td class="hit pend">·</td><td class="fus"><a href="https://www.cbf.com.br/futebol-brasileiro/noticias/campeonato-brasileiro-serie-a/a/cbf-divulga-tabela-detalhada-das-rodadas-19-a-24-do-brasileirao-serie-a" target="_blank" rel="noopener" class="fu">cbf.com.br</a> <a href="https://www.band.com.br/band-vale/noticias/quando-e-a-retomada-do-brasileirao-serie-a-apos-a-copa-do-mundo-202607061416" target="_blank" rel="noopener" class="fu">band.com.br</a></td></tr>
+<tr data-liga="Brasileirão Série A" data-mercado="1x2" data-res="" data-mhit="" data-phit="" data-eq="internacional cruzeiro 1x2 brasileirão série a"><td class="nowrap dt">22 jul</td><td class="match"><span class="liga-dot" title="Brasileirão Série A"></span>Internacional <span class="vs">vs</span> Cruzeiro</td><td class="dijo"><b class="d-1x2">Internacional</b> <span class="d-p">47%</span></td><td class="nowrap res"><span class="pend">por jugar</span></td><td class="hit pend">·</td><td class="hit pend">·</td><td class="fus"><span class="muted">—</span></td></tr>
+<tr data-liga="Brasileirão Série A" data-mercado="1x2" data-res="" data-mhit="" data-phit="" data-eq="são paulo athletico-pr 1x2 brasileirão série a"><td class="nowrap dt">22 jul</td><td class="match"><span class="liga-dot" title="Brasileirão Série A"></span>São Paulo <span class="vs">vs</span> Athletico-PR</td><td class="dijo"><b class="d-1x2">São Paulo</b> <span class="d-p">48%</span><span class="d-pato">🟡 Athletico-PR · moderada <span class="vm vm-contradice">contradice</span></span></td><td class="nowrap res"><span class="pend">por jugar</span></td><td class="hit pend">·</td><td class="hit pend">·</td><td class="fus"><a href="https://www.cbf.com.br/futebol-brasileiro/noticias/campeonato-brasileiro-serie-a/a/cbf-divulga-tabela-detalhada-das-rodadas-19-a-24-do-brasileirao-serie-a" target="_blank" rel="noopener" class="fu">cbf.com.br</a> <a href="https://www.band.com.br/band-vale/noticias/quando-e-a-retomada-do-brasileirao-serie-a-apos-a-copa-do-mundo-202607061416" target="_blank" rel="noopener" class="fu">band.com.br</a></td></tr>
+<tr data-liga="Brasileirão Série A" data-mercado="hándicap" data-res="" data-mhit="" data-phit="" data-eq="chapecoense flamengo hándicap brasileirão série a"><td class="nowrap dt">22 jul</td><td class="match"><span class="liga-dot" title="Brasileirão Série A"></span>Chapecoense <span class="vs">vs</span> Flamengo</td><td class="dijo"><b class="d-1x2">Flamengo</b> <span class="d-p">53%</span><span class="d-mkt">Hándicap +1 · Local gana y +2.5 · Goles local +1.5 · Sin empate</span><span class="d-pato">🟡 Flamengo · moderada <span class="vm vm-confirma">confirma</span></span></td><td class="nowrap res"><span class="pend">por jugar</span></td><td class="hit pend">·</td><td class="hit pend">·</td><td class="fus"><a href="https://www.band.com.br/esportes/futebol/copa-do-mundo/noticias/brasileirao-copa-do-mundo-pausa-202606010842" target="_blank" rel="noopener" class="fu">band.com.br</a> <a href="https://www.gazetaesportiva.com/" target="_blank" rel="noopener" class="fu">gazetaesportiva.com</a></td></tr>
+<tr data-liga="Brasileirão Série A" data-mercado="hándicap" data-res="" data-mhit="" data-phit="" data-eq="corinthians remo hándicap brasileirão série a"><td class="nowrap dt">23 jul</td><td class="match"><span class="liga-dot" title="Brasileirão Série A"></span>Corinthians <span class="vs">vs</span> Remo <span class="tbadge">datos limitados</span></td><td class="dijo"><b class="d-1x2">Corinthians</b> <span class="d-p">59%</span><span class="d-mkt">Hándicap +1 · Goles local +1.5 · Local gana y +2.5 · Sin empate</span><span class="d-pato">🟡 Corinthians · moderada <span class="vm vm-rellena">rellena</span></span></td><td class="nowrap res"><span class="pend">por jugar</span></td><td class="hit pend">·</td><td class="hit pend">·</td><td class="fus"><a href="https://www.cbf.com.br/futebol-brasileiro/noticias/campeonato-brasileiro-serie-a/a/cbf-divulga-tabela-detalhada-das-rodadas-19-a-24-do-brasileirao-serie-a" target="_blank" rel="noopener" class="fu">cbf.com.br</a> <a href="https://www.band.com.br/band-vale/noticias/quando-e-a-retomada-do-brasileirao-serie-a-apos-a-copa-do-mundo-202607061416" target="_blank" rel="noopener" class="fu">band.com.br</a></td></tr></tbody>
     </table></div>
-    <div id="empty-filter" class="empty-note" hidden>Ningún partido cumple ese filtro.</div>
+    <div id="sin-resultados" class="sin-res" hidden>Ningún partido cumple ese filtro.</div>
+    <details class="matices"><summary>Partidos sin dirección — <b>matiz</b>, el Pato no dio llamada
+      (2) · no puntúan</summary><ul><li>Atlético-MG vs Bahia</li> <li>Coritiba vs Palmeiras</li></ul></details>
   </section>
+
   <footer>
-    <p>Las 3 cuentas van siempre separadas — nunca un número único que las mezcle. Los fallos se
-      publican igual que los aciertos. Esto no es un producto de apuestas: es un pronóstico honesto.</p>
-    <p class="gen">Generado 2026-07-17T15:43:08 UTC · Regular Season - 19 ·
-      producto de confianza</p>
+    <p class="f-lema">Las tres cuentas van <b>siempre separadas</b> — nunca un número único que las
+      mezcle. Los fallos se publican igual que los aciertos.</p>
+    <p class="gen">Generado 2026-07-18T06:00:34 UTC · Brasileirão Série A
+      · producto de confianza, no de apuestas</p>
     <p class="disc">+18 · Juego responsable · Esto es entretenimiento e información, no una fórmula
       para ganar dinero.</p>
   </footer>
 </main>
-<script type="application/json" id="dashboard-data">{"estado": "vivo", "generado_utc": "2026-07-17T15:43:08.038364+00:00", "jornada": "Regular Season - 19", "backtest": {"ece_pct": 0.68, "n": 5294, "modelo": "dixon_coles_weighted (level_weight_B=0.81)", "scope": "Brasileirão 2012-2025 (walk-forward, anti-look-ahead)"}, "vivo": {"n_matches": 2, "ruido": true, "modelo": {"h1x2": {"a": 2, "n": 2}, "ou": {"a": 0, "n": 0}, "calib": {"bins": [{"lo": 0.0, "hi": 0.1, "n": 0, "p": null, "y": null}, {"lo": 0.1, "hi": 0.2, "n": 0, "p": null, "y": null}, {"lo": 0.2, "hi": 0.3, "n": 4, "p": 0.252375, "y": 0.0}, {"lo": 0.3, "hi": 0.4, "n": 0, "p": null, "y": null}, {"lo": 0.4, "hi": 0.5, "n": 1, "p": 0.4698, "y": 1.0}, {"lo": 0.5, "hi": 0.6, "n": 1, "p": 0.5206, "y": 1.0}, {"lo": 0.6, "hi": 0.7, "n": 0, "p": null, "y": null}, {"lo": 0.7, "hi": 0.8, "n": 0, "p": null, "y": null}, {"lo": 0.8, "hi": 0.9, "n": 0, "p": null, "y": null}, {"lo": 0.9, "hi": 1.0, "n": 0, "p": null, "y": null}], "ece_pct": null, "n": 2}}, "pato": {"a": 2, "n": 2, "por_fuerza": {"leve": {"a": 2, "n": 2}}}, "aporta": {"a": 0, "n": 0, "contradice": [], "rellena": []}}, "tabla": [{"fid": "1492295", "jornada": "19", "fecha": "17 jul", "kickoff_utc": "2026-07-17T23:00:00+00:00", "home": "Fluminense", "away": "RB Bragantino", "p": {"H": 0.5158, "D": 0.2536, "A": 0.2307}, "pou": {"over": 0.4618, "under": 0.5382}, "mercados_sel": [], "badge": false, "estado_pato": "ok", "lean": "home", "fuerza": "leve", "vs_modelo": "confirma", "fuentes": [{"dom": "centralfluminense.com.br", "url": "https://centralfluminense.com.br/"}, {"dom": "lance.com.br", "url": "https://www.lance.com.br/fluminense"}, {"dom": "sportytrader.es", "url": "https://www.sportytrader.es/"}], "score": null, "res": null, "goles": null, "modelo_1x2_hit": null, "modelo_ou_hit": null, "pato_hit": null, "contradice": false}, {"fid": "1492297", "jornada": "19", "fecha": "17 jul", "kickoff_utc": "2026-07-17T23:00:00+00:00", "home": "Mirassol", "away": "Grêmio", "p": {"H": 0.468, "D": 0.2737, "A": 0.2583}, "pou": {"over": 0.4097, "under": 0.5903}, "mercados_sel": [], "badge": true, "estado_pato": "ok", "lean": "none", "fuerza": "leve", "vs_modelo": "matiz", "fuentes": [{"dom": "lance.com.br", "url": "https://www.lance.com.br/mirassol"}, {"dom": "flashscore.com", "url": "https://www.flashscore.com/"}], "score": null, "res": null, "goles": null, "modelo_1x2_hit": null, "modelo_ou_hit": null, "pato_hit": null, "contradice": false}, {"fid": "1492290", "jornada": "19", "fecha": "21 jul", "kickoff_utc": "2026-07-21T22:30:00+00:00", "home": "Atlético-MG", "away": "Bahia", "p": {"H": 0.5414, "D": 0.2429, "A": 0.2157}, "pou": {"over": 0.4884, "under": 0.5116}, "mercados_sel": [{"key": "oul_1.5", "etiqueta": "Goles local +1.5", "marcado": false, "ece": 0.01, "z": 0.86, "texto": "Atlético-MG marca +1.5: 50%", "probs": {"over": 0.4974, "under": 0.5026}}, {"key": "comb_local_o25", "etiqueta": "Local gana y +2.5", "marcado": false, "ece": 0.0114, "z": 0.83, "texto": "Atlético-MG gana y +2.5 goles: 32%", "probs": {"si": 0.3197}}, {"key": "handicap_-1", "etiqueta": "Hándicap −1", "marcado": false, "ece": 0.0184, "z": 0.65, "texto": "Atlético-MG −1 (gana por 2+): L 29% / X 25% / V 46%", "probs": {"local": 0.2947, "empate": 0.2467, "visitante": 0.4586}}], "badge": false, "estado_pato": "ok", "lean": "none", "fuerza": "leve", "vs_modelo": "matiz", "fuentes": [{"dom": "cbf.com.br", "url": "https://www.cbf.com.br/futebol-brasileiro/noticias/campeonato-brasileiro-serie-a/a/cbf-divulga-tabela-detalhada-das-rodadas-19-a-24-do-brasileirao-serie-a"}, {"dom": "band.com.br", "url": "https://www.band.com.br/band-vale/noticias/quando-e-a-retomada-do-brasileirao-serie-a-apos-a-copa-do-mundo-202607061416"}], "score": null, "res": null, "goles": null, "modelo_1x2_hit": null, "modelo_ou_hit": null, "pato_hit": null, "contradice": false}, {"fid": "1492294", "jornada": "19", "fecha": "22 jul", "kickoff_utc": "2026-07-22T22:30:00+00:00", "home": "Coritiba", "away": "Palmeiras", "p": {"H": 0.2376, "D": 0.2638, "A": 0.4986}, "pou": {"over": 0.43, "under": 0.57}, "mercados_sel": [{"key": "handicap_+1", "etiqueta": "Hándicap +1", "marcado": false, "ece": 0.0109, "z": 2.72, "texto": "Palmeiras +1 (no pierde por 2+): L 50% / X 25% / V 25%", "probs": {"local": 0.5014, "empate": 0.2482, "visitante": 0.2504}}, {"key": "oul_1.5", "etiqueta": "Goles local +1.5", "marcado": false, "ece": 0.01, "z": 1.72, "texto": "Coritiba marca +1.5: 24%", "probs": {"over": 0.2374, "under": 0.7626}}, {"key": "comb_local_o25", "etiqueta": "Local gana y +2.5", "marcado": false, "ece": 0.0114, "z": 1.65, "texto": "Coritiba gana y +2.5 goles: 11%", "probs": {"si": 0.1143}}, {"key": "dnb", "etiqueta": "Sin empate", "marcado": true, "ece": 0.0202, "z": 2.55, "texto": "sin empate: Coritiba 32% / Palmeiras 68%", "probs": {"local": 0.3227, "visitante": 0.6773}}], "badge": false, "estado_pato": "ok", "lean": "none", "fuerza": "leve", "vs_modelo": "matiz", "fuentes": [{"dom": "cbf.com.br", "url": "https://www.cbf.com.br/futebol-brasileiro/noticias/campeonato-brasileiro-serie-a/a/cbf-divulga-tabela-detalhada-das-rodadas-19-a-24-do-brasileirao-serie-a"}, {"dom": "band.com.br", "url": "https://www.band.com.br/band-vale/noticias/quando-e-a-retomada-do-brasileirao-serie-a-apos-a-copa-do-mundo-202607061416"}], "score": null, "res": null, "goles": null, "modelo_1x2_hit": null, "modelo_ou_hit": null, "pato_hit": null, "contradice": false}, {"fid": "1492296", "jornada": "19", "fecha": "22 jul", "kickoff_utc": "2026-07-23T00:30:00+00:00", "home": "Internacional", "away": "Cruzeiro", "p": {"H": 0.468, "D": 0.2838, "A": 0.2483}, "pou": {"over": 0.371, "under": 0.629}, "mercados_sel": [], "badge": false, "estado_pato": "sin_lectura", "lean": null, "fuerza": null, "vs_modelo": null, "fuentes": [], "score": null, "res": null, "goles": null, "modelo_1x2_hit": null, "modelo_ou_hit": null, "pato_hit": null, "contradice": false}, {"fid": "1492298", "jornada": "19", "fecha": "22 jul", "kickoff_utc": "2026-07-23T00:30:00+00:00", "home": "São Paulo", "away": "Athletico-PR", "p": {"H": 0.4817, "D": 0.2754, "A": 0.2429}, "pou": {"over": 0.3942, "under": 0.6058}, "mercados_sel": [], "badge": false, "estado_pato": "ok", "lean": "away", "fuerza": "moderada", "vs_modelo": "contradice", "fuentes": [{"dom": "cbf.com.br", "url": "https://www.cbf.com.br/futebol-brasileiro/noticias/campeonato-brasileiro-serie-a/a/cbf-divulga-tabela-detalhada-das-rodadas-19-a-24-do-brasileirao-serie-a"}, {"dom": "band.com.br", "url": "https://www.band.com.br/band-vale/noticias/quando-e-a-retomada-do-brasileirao-serie-a-apos-a-copa-do-mundo-202607061416"}], "score": null, "res": null, "goles": null, "modelo_1x2_hit": null, "modelo_ou_hit": null, "pato_hit": null, "contradice": false}, {"fid": "1492292", "jornada": "19", "fecha": "22 jul", "kickoff_utc": "2026-07-23T00:30:00+00:00", "home": "Chapecoense", "away": "Flamengo", "p": {"H": 0.2231, "D": 0.2507, "A": 0.5262}, "pou": {"over": 0.4655, "under": 0.5345}, "mercados_sel": [{"key": "handicap_+1", "etiqueta": "Hándicap +1", "marcado": false, "ece": 0.0109, "z": 3.04, "texto": "Flamengo +1 (no pierde por 2+): L 47% / X 25% / V 28%", "probs": {"local": 0.4738, "empate": 0.2479, "visitante": 0.2783}}, {"key": "comb_local_o25", "etiqueta": "Local gana y +2.5", "marcado": false, "ece": 0.0114, "z": 1.67, "texto": "Chapecoense gana y +2.5 goles: 11%", "probs": {"si": 0.1133}}, {"key": "oul_1.5", "etiqueta": "Goles local +1.5", "marcado": false, "ece": 0.01, "z": 1.66, "texto": "Chapecoense marca +1.5: 24%", "probs": {"over": 0.243, "under": 0.757}}, {"key": "dnb", "etiqueta": "Sin empate", "marcado": true, "ece": 0.0202, "z": 2.75, "texto": "sin empate: Chapecoense 30% / Flamengo 70%", "probs": {"local": 0.2977, "visitante": 0.7023}}], "badge": false, "estado_pato": "ok", "lean": "away", "fuerza": "moderada", "vs_modelo": "confirma", "fuentes": [{"dom": "band.com.br", "url": "https://www.band.com.br/esportes/futebol/copa-do-mundo/noticias/brasileirao-copa-do-mundo-pausa-202606010842"}, {"dom": "gazetaesportiva.com", "url": "https://www.gazetaesportiva.com/"}], "score": null, "res": null, "goles": null, "modelo_1x2_hit": null, "modelo_ou_hit": null, "pato_hit": null, "contradice": false}, {"fid": "1492293", "jornada": "19", "fecha": "23 jul", "kickoff_utc": "2026-07-23T22:30:00+00:00", "home": "Corinthians", "away": "Remo", "p": {"H": 0.5863, "D": 0.2423, "A": 0.1713}, "pou": {"over": 0.4362, "under": 0.5638}, "mercados_sel": [{"key": "handicap_+1", "etiqueta": "Hándicap +1", "marcado": false, "ece": 0.0109, "z": 1.05, "texto": "Remo +1 (no pierde por 2+): L 83% / X 12% / V 5%", "probs": {"local": 0.8287, "empate": 0.1214, "visitante": 0.05}}, {"key": "oul_1.5", "etiqueta": "Goles local +1.5", "marcado": false, "ece": 0.01, "z": 0.81, "texto": "Corinthians marca +1.5: 49%", "probs": {"over": 0.4929, "under": 0.5071}}, {"key": "comb_local_o25", "etiqueta": "Local gana y +2.5", "marcado": false, "ece": 0.0114, "z": 0.81, "texto": "Corinthians gana y +2.5 goles: 32%", "probs": {"si": 0.3177}}, {"key": "dnb", "etiqueta": "Sin empate", "marcado": true, "ece": 0.0202, "z": 1.04, "texto": "sin empate: Corinthians 77% / Remo 23%", "probs": {"local": 0.7738, "visitante": 0.2262}}], "badge": true, "estado_pato": "ok", "lean": "home", "fuerza": "moderada", "vs_modelo": "rellena", "fuentes": [{"dom": "cbf.com.br", "url": "https://www.cbf.com.br/futebol-brasileiro/noticias/campeonato-brasileiro-serie-a/a/cbf-divulga-tabela-detalhada-das-rodadas-19-a-24-do-brasileirao-serie-a"}, {"dom": "band.com.br", "url": "https://www.band.com.br/band-vale/noticias/quando-e-a-retomada-do-brasileirao-serie-a-apos-a-copa-do-mundo-202607061416"}], "score": null, "res": null, "goles": null, "modelo_1x2_hit": null, "modelo_ou_hit": null, "pato_hit": null, "contradice": false}], "matices": [{"fid": "1492297", "jornada": "19", "fecha": "17 jul", "kickoff_utc": "2026-07-17T23:00:00+00:00", "home": "Mirassol", "away": "Grêmio", "p": {"H": 0.468, "D": 0.2737, "A": 0.2583}, "pou": {"over": 0.4097, "under": 0.5903}, "mercados_sel": [], "badge": true, "estado_pato": "ok", "lean": "none", "fuerza": "leve", "vs_modelo": "matiz", "fuentes": [{"dom": "lance.com.br", "url": "https://www.lance.com.br/mirassol"}, {"dom": "flashscore.com", "url": "https://www.flashscore.com/"}], "score": null, "res": null, "goles": null, "modelo_1x2_hit": null, "modelo_ou_hit": null, "pato_hit": null, "contradice": false}, {"fid": "1492290", "jornada": "19", "fecha": "21 jul", "kickoff_utc": "2026-07-21T22:30:00+00:00", "home": "Atlético-MG", "away": "Bahia", "p": {"H": 0.5414, "D": 0.2429, "A": 0.2157}, "pou": {"over": 0.4884, "under": 0.5116}, "mercados_sel": [{"key": "oul_1.5", "etiqueta": "Goles local +1.5", "marcado": false, "ece": 0.01, "z": 0.86, "texto": "Atlético-MG marca +1.5: 50%", "probs": {"over": 0.4974, "under": 0.5026}}, {"key": "comb_local_o25", "etiqueta": "Local gana y +2.5", "marcado": false, "ece": 0.0114, "z": 0.83, "texto": "Atlético-MG gana y +2.5 goles: 32%", "probs": {"si": 0.3197}}, {"key": "handicap_-1", "etiqueta": "Hándicap −1", "marcado": false, "ece": 0.0184, "z": 0.65, "texto": "Atlético-MG −1 (gana por 2+): L 29% / X 25% / V 46%", "probs": {"local": 0.2947, "empate": 0.2467, "visitante": 0.4586}}], "badge": false, "estado_pato": "ok", "lean": "none", "fuerza": "leve", "vs_modelo": "matiz", "fuentes": [{"dom": "cbf.com.br", "url": "https://www.cbf.com.br/futebol-brasileiro/noticias/campeonato-brasileiro-serie-a/a/cbf-divulga-tabela-detalhada-das-rodadas-19-a-24-do-brasileirao-serie-a"}, {"dom": "band.com.br", "url": "https://www.band.com.br/band-vale/noticias/quando-e-a-retomada-do-brasileirao-serie-a-apos-a-copa-do-mundo-202607061416"}], "score": null, "res": null, "goles": null, "modelo_1x2_hit": null, "modelo_ou_hit": null, "pato_hit": null, "contradice": false}, {"fid": "1492294", "jornada": "19", "fecha": "22 jul", "kickoff_utc": "2026-07-22T22:30:00+00:00", "home": "Coritiba", "away": "Palmeiras", "p": {"H": 0.2376, "D": 0.2638, "A": 0.4986}, "pou": {"over": 0.43, "under": 0.57}, "mercados_sel": [{"key": "handicap_+1", "etiqueta": "Hándicap +1", "marcado": false, "ece": 0.0109, "z": 2.72, "texto": "Palmeiras +1 (no pierde por 2+): L 50% / X 25% / V 25%", "probs": {"local": 0.5014, "empate": 0.2482, "visitante": 0.2504}}, {"key": "oul_1.5", "etiqueta": "Goles local +1.5", "marcado": false, "ece": 0.01, "z": 1.72, "texto": "Coritiba marca +1.5: 24%", "probs": {"over": 0.2374, "under": 0.7626}}, {"key": "comb_local_o25", "etiqueta": "Local gana y +2.5", "marcado": false, "ece": 0.0114, "z": 1.65, "texto": "Coritiba gana y +2.5 goles: 11%", "probs": {"si": 0.1143}}, {"key": "dnb", "etiqueta": "Sin empate", "marcado": true, "ece": 0.0202, "z": 2.55, "texto": "sin empate: Coritiba 32% / Palmeiras 68%", "probs": {"local": 0.3227, "visitante": 0.6773}}], "badge": false, "estado_pato": "ok", "lean": "none", "fuerza": "leve", "vs_modelo": "matiz", "fuentes": [{"dom": "cbf.com.br", "url": "https://www.cbf.com.br/futebol-brasileiro/noticias/campeonato-brasileiro-serie-a/a/cbf-divulga-tabela-detalhada-das-rodadas-19-a-24-do-brasileirao-serie-a"}, {"dom": "band.com.br", "url": "https://www.band.com.br/band-vale/noticias/quando-e-a-retomada-do-brasileirao-serie-a-apos-a-copa-do-mundo-202607061416"}], "score": null, "res": null, "goles": null, "modelo_1x2_hit": null, "modelo_ou_hit": null, "pato_hit": null, "contradice": false}]}</script>
+<script type="application/json" id="dashboard-data">{"estado": "vivo", "generado_utc": "2026-07-18T06:00:34.606195+00:00", "liga_actual": "Brasileirão Série A", "ligas": ["Brasileirão Série A"], "mercados": ["1x2", "goles", "hándicap"], "actualizado": "18 jul", "rango": "16 jul–23 jul", "backtest": {"ece_pct": 0.68, "n": 5294, "scope": "Brasileirão 2012-2025 (walk-forward, anti-look-ahead)"}, "cuentas": {"modelo": {"n": 5, "fav": {"a": 4, "n": 5}, "ece_pct": null, "brier": null, "bins": [{"lo": 0.0, "hi": 0.1, "n": 0, "p": null, "y": null}, {"lo": 0.1, "hi": 0.2, "n": 1, "p": 0.1799, "y": 0.0}, {"lo": 0.2, "hi": 0.3, "n": 9, "p": 0.2518777777777778, "y": 0.1111111111111111}, {"lo": 0.3, "hi": 0.4, "n": 0, "p": null, "y": null}, {"lo": 0.4, "hi": 0.5, "n": 2, "p": 0.4689, "y": 1.0}, {"lo": 0.5, "hi": 0.6, "n": 3, "p": 0.5384666666666666, "y": 0.6666666666666666}, {"lo": 0.6, "hi": 0.7, "n": 0, "p": null, "y": null}, {"lo": 0.7, "hi": 0.8, "n": 0, "p": null, "y": null}, {"lo": 0.8, "hi": 0.9, "n": 0, "p": null, "y": null}, {"lo": 0.9, "hi": 1.0, "n": 0, "p": null, "y": null}], "ruido": true}, "pato": {"n": 4, "acc": {"a": 3, "n": 4}, "por_fuerza": {"moderada": {"a": 1, "n": 1}, "fuerte": {"a": 0, "n": 0}, "leve": {"a": 2, "n": 3}}, "ruido": true}, "aporta": {"n": 0, "acc": {"a": 0, "n": 0}, "contradice": [], "rellena": [], "ruido": true}}, "tabla": [{"liga": "Brasileirão Série A", "fecha": "16 jul", "kickoff_utc": "2026-07-16T22:30:00+00:00", "home": "Botafogo", "away": "Santos", "dijo": {"fav_eq": "Botafogo", "fav_p": 0.5206, "mercado_txt": ""}, "mercado_key": "1x2", "resultado": "2-1", "res": "H", "goles": 3, "modelo_hit": true, "pato_hit": true, "badge": false, "fuentes": [{"dom": "fogonarede.com.br", "url": "https://fogonarede.com.br/noticias-do-botafogo/santos-tem-retorno-e-desfalque-de-peso-contra-o-botafogo-pelo-brasileirao/"}, {"dom": "fogaonet.com", "url": "https://www.fogaonet.com/noticias-do-botafogo/cbf-divulga-tabela-brasileirao-pos-copa-mundo-botafogo-santos-16-julho/"}], "pato": {"equipo": "Botafogo", "fuerza": "leve", "vs_modelo": "confirma"}}, {"liga": "Brasileirão Série A", "fecha": "16 jul", "kickoff_utc": "2026-07-16T22:30:00+00:00", "home": "Vitória", "away": "Vasco da Gama", "dijo": {"fav_eq": "Vitória", "fav_p": 0.4698, "mercado_txt": ""}, "mercado_key": "1x2", "resultado": "1-0", "res": "H", "goles": 1, "modelo_hit": true, "pato_hit": true, "badge": false, "fuentes": [{"dom": "lance.com.br", "url": "https://www.lance.com.br/vasco/vasco-nao-vai-ter-reforcos-disponiveis-no-retorno-do-brasileirao.html"}, {"dom": "bahianoticias.com.br", "url": "https://www.bahianoticias.com.br/esportes/vitoria"}], "pato": {"equipo": "Vitória", "fuerza": "leve", "vs_modelo": "confirma"}}, {"liga": "Brasileirão Série A", "fecha": "17 jul", "kickoff_utc": "2026-07-17T22:30:00+00:00", "home": "Bahia", "away": "Chapecoense", "dijo": {"fav_eq": "Bahia", "fav_p": 0.579, "mercado_txt": "Hándicap +1 · Goles local +1.5 · Local gana y +2.5 · Sin empate"}, "mercado_key": "hándicap", "resultado": "2-0", "res": "H", "goles": 2, "modelo_hit": true, "pato_hit": true, "badge": false, "fuentes": [{"dom": "bahianoticias.com.br", "url": "https://www.bahianoticias.com.br/esportes/bahia"}, {"dom": "atarde.com.br", "url": "https://atarde.com.br/esportes/bahia"}, {"dom": "gazetaesportiva.com", "url": "https://www.gazetaesportiva.com/"}], "pato": {"equipo": "Bahia", "fuerza": "moderada", "vs_modelo": "confirma"}}, {"liga": "Brasileirão Série A", "fecha": "17 jul", "kickoff_utc": "2026-07-17T23:00:00+00:00", "home": "Fluminense", "away": "RB Bragantino", "dijo": {"fav_eq": "Fluminense", "fav_p": 0.5158, "mercado_txt": ""}, "mercado_key": "1x2", "resultado": "1-1", "res": "D", "goles": 2, "modelo_hit": false, "pato_hit": false, "badge": false, "fuentes": [{"dom": "centralfluminense.com.br", "url": "https://centralfluminense.com.br/"}, {"dom": "lance.com.br", "url": "https://www.lance.com.br/fluminense"}, {"dom": "sportytrader.es", "url": "https://www.sportytrader.es/"}], "pato": {"equipo": "Fluminense", "fuerza": "leve", "vs_modelo": "confirma"}}, {"liga": "Brasileirão Série A", "fecha": "17 jul", "kickoff_utc": "2026-07-17T23:00:00+00:00", "home": "Mirassol", "away": "Grêmio", "dijo": {"fav_eq": "Mirassol", "fav_p": 0.468, "mercado_txt": ""}, "mercado_key": "1x2", "resultado": "2-1", "res": "H", "goles": 3, "modelo_hit": true, "pato_hit": null, "badge": true, "fuentes": [{"dom": "lance.com.br", "url": "https://www.lance.com.br/mirassol"}, {"dom": "flashscore.com", "url": "https://www.flashscore.com/"}]}, {"liga": "Brasileirão Série A", "fecha": "21 jul", "kickoff_utc": "2026-07-21T22:30:00+00:00", "home": "Atlético-MG", "away": "Bahia", "dijo": {"fav_eq": "Atlético-MG", "fav_p": 0.5414, "mercado_txt": "Goles local +1.5 · Local gana y +2.5 · Hándicap −1"}, "mercado_key": "goles", "resultado": null, "res": "", "goles": null, "modelo_hit": null, "pato_hit": null, "badge": false, "fuentes": [{"dom": "cbf.com.br", "url": "https://www.cbf.com.br/futebol-brasileiro/noticias/campeonato-brasileiro-serie-a/a/cbf-divulga-tabela-detalhada-das-rodadas-19-a-24-do-brasileirao-serie-a"}, {"dom": "band.com.br", "url": "https://www.band.com.br/band-vale/noticias/quando-e-a-retomada-do-brasileirao-serie-a-apos-a-copa-do-mundo-202607061416"}]}, {"liga": "Brasileirão Série A", "fecha": "22 jul", "kickoff_utc": "2026-07-22T22:30:00+00:00", "home": "Coritiba", "away": "Palmeiras", "dijo": {"fav_eq": "Palmeiras", "fav_p": 0.4986, "mercado_txt": "Hándicap +1 · Goles local +1.5 · Local gana y +2.5 · Sin empate"}, "mercado_key": "hándicap", "resultado": null, "res": "", "goles": null, "modelo_hit": null, "pato_hit": null, "badge": false, "fuentes": [{"dom": "cbf.com.br", "url": "https://www.cbf.com.br/futebol-brasileiro/noticias/campeonato-brasileiro-serie-a/a/cbf-divulga-tabela-detalhada-das-rodadas-19-a-24-do-brasileirao-serie-a"}, {"dom": "band.com.br", "url": "https://www.band.com.br/band-vale/noticias/quando-e-a-retomada-do-brasileirao-serie-a-apos-a-copa-do-mundo-202607061416"}]}, {"liga": "Brasileirão Série A", "fecha": "22 jul", "kickoff_utc": "2026-07-23T00:30:00+00:00", "home": "Internacional", "away": "Cruzeiro", "dijo": {"fav_eq": "Internacional", "fav_p": 0.468, "mercado_txt": ""}, "mercado_key": "1x2", "resultado": null, "res": "", "goles": null, "modelo_hit": null, "pato_hit": null, "badge": false, "fuentes": []}, {"liga": "Brasileirão Série A", "fecha": "22 jul", "kickoff_utc": "2026-07-23T00:30:00+00:00", "home": "São Paulo", "away": "Athletico-PR", "dijo": {"fav_eq": "São Paulo", "fav_p": 0.4817, "mercado_txt": ""}, "mercado_key": "1x2", "resultado": null, "res": "", "goles": null, "modelo_hit": null, "pato_hit": null, "badge": false, "fuentes": [{"dom": "cbf.com.br", "url": "https://www.cbf.com.br/futebol-brasileiro/noticias/campeonato-brasileiro-serie-a/a/cbf-divulga-tabela-detalhada-das-rodadas-19-a-24-do-brasileirao-serie-a"}, {"dom": "band.com.br", "url": "https://www.band.com.br/band-vale/noticias/quando-e-a-retomada-do-brasileirao-serie-a-apos-a-copa-do-mundo-202607061416"}], "pato": {"equipo": "Athletico-PR", "fuerza": "moderada", "vs_modelo": "contradice"}}, {"liga": "Brasileirão Série A", "fecha": "22 jul", "kickoff_utc": "2026-07-23T00:30:00+00:00", "home": "Chapecoense", "away": "Flamengo", "dijo": {"fav_eq": "Flamengo", "fav_p": 0.5262, "mercado_txt": "Hándicap +1 · Local gana y +2.5 · Goles local +1.5 · Sin empate"}, "mercado_key": "hándicap", "resultado": null, "res": "", "goles": null, "modelo_hit": null, "pato_hit": null, "badge": false, "fuentes": [{"dom": "band.com.br", "url": "https://www.band.com.br/esportes/futebol/copa-do-mundo/noticias/brasileirao-copa-do-mundo-pausa-202606010842"}, {"dom": "gazetaesportiva.com", "url": "https://www.gazetaesportiva.com/"}], "pato": {"equipo": "Flamengo", "fuerza": "moderada", "vs_modelo": "confirma"}}, {"liga": "Brasileirão Série A", "fecha": "23 jul", "kickoff_utc": "2026-07-23T22:30:00+00:00", "home": "Corinthians", "away": "Remo", "dijo": {"fav_eq": "Corinthians", "fav_p": 0.5863, "mercado_txt": "Hándicap +1 · Goles local +1.5 · Local gana y +2.5 · Sin empate"}, "mercado_key": "hándicap", "resultado": null, "res": "", "goles": null, "modelo_hit": null, "pato_hit": null, "badge": true, "fuentes": [{"dom": "cbf.com.br", "url": "https://www.cbf.com.br/futebol-brasileiro/noticias/campeonato-brasileiro-serie-a/a/cbf-divulga-tabela-detalhada-das-rodadas-19-a-24-do-brasileirao-serie-a"}, {"dom": "band.com.br", "url": "https://www.band.com.br/band-vale/noticias/quando-e-a-retomada-do-brasileirao-serie-a-apos-a-copa-do-mundo-202607061416"}], "pato": {"equipo": "Corinthians", "fuerza": "moderada", "vs_modelo": "rellena"}}], "matices": [{"home": "Atlético-MG", "away": "Bahia"}, {"home": "Coritiba", "away": "Palmeiras"}]}</script>
 <script>
 (function(){
-  var t=document.getElementById('audit');if(!t)return;
-  var rows=[].slice.call(t.tBodies[0].rows);
-  var f={pato:'f-pato',vm:'f-vm',mhit:'f-mhit',phit:'f-phit',badge:'f-badge'};
-  var sel={};for(var k in f){sel[k]=document.getElementById(f[k]);}
-  var empty=document.getElementById('empty-filter');
-  function vmMatch(want,have){ if(!want)return true; if(want==='none')return have===''||have==='matiz'||!have; return want===have; }
-  function apply(){
-    var shown=0;
-    rows.forEach(function(r){
-      var ok=true;
-      if(sel.pato.value && r.dataset.pato!==sel.pato.value)ok=false;
-      if(sel.vm.value && !vmMatch(sel.vm.value,r.dataset.vm))ok=false;
-      if(sel.mhit.value && r.dataset.mhit!==sel.mhit.value)ok=false;
-      if(sel.phit.value && r.dataset.phit!==sel.phit.value)ok=false;
-      if(sel.badge.value && r.dataset.badge!==sel.badge.value)ok=false;
-      r.hidden=!ok; if(ok)shown++;
-    });
-    if(empty)empty.hidden=shown>0;
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  var paneles=[].slice.call(document.querySelectorAll('.panel-cuenta'));
+  function activar(cuenta){
+    tabs.forEach(function(t){t.classList.toggle('activo',t.dataset.cuenta===cuenta);});
+    paneles.forEach(function(p){p.hidden=p.dataset.cuenta!==cuenta;});
   }
-  for(var k in sel)sel[k].addEventListener('change',apply);
-  var rb=document.getElementById('f-reset');
-  if(rb)rb.addEventListener('click',function(){for(var k in sel)sel[k].value='';apply();});
+  tabs.forEach(function(t){t.addEventListener('click',function(){activar(t.dataset.cuenta);});});
+
+  var tabla=document.getElementById('tabla');if(!tabla)return;
+  var filas=[].slice.call(tabla.tBodies[0].rows);
+  var g=function(id){return document.getElementById(id);};
+  var fLiga=g('f-liga'),fMerc=g('f-mercado'),fRes=g('f-res'),fMhit=g('f-mhit'),fBus=g('f-buscar');
+  var vacio=g('sin-resultados');
+  function aplicar(){
+    var liga=fLiga?fLiga.value:'', merc=fMerc?fMerc.value:'', res=fRes?fRes.value:'',
+        mhit=fMhit?fMhit.value:'', bus=fBus?fBus.value.trim().toLowerCase():'';
+    var vistas=0;
+    filas.forEach(function(r){
+      var ok=true, d=r.dataset;
+      if(liga && d.liga!==liga)ok=false;
+      if(merc && d.mercado!==merc)ok=false;
+      if(res && d.res!==res)ok=false;
+      if(mhit && d.mhit!==mhit)ok=false;
+      if(bus && d.eq.indexOf(bus)<0)ok=false;
+      r.hidden=!ok; if(ok)vistas++;
+    });
+    if(vacio)vacio.hidden=vistas>0;
+  }
+  [fLiga,fMerc,fRes,fMhit].forEach(function(s){if(s)s.addEventListener('change',aplicar);});
+  if(fBus)fBus.addEventListener('input',aplicar);
+  var rb=g('f-reset');
+  if(rb)rb.addEventListener('click',function(){
+    [fLiga,fMerc,fRes,fMhit].forEach(function(s){if(s)s.value='';});
+    if(fBus)fBus.value='';aplicar();
+  });
 })();
 </script>
 </body></html>
